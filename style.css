@@ -10,7 +10,7 @@ body {
     color: #e6edf3;
 }
 
-/* HERO */
+/* HERO SECTION */
 .hero {
     height: 100vh;
     background: linear-gradient(to bottom right, #0d1117, #161b22);
@@ -30,7 +30,7 @@ body {
 
 .hero p {
     margin-top: 10px;
-    opacity: 0.8;
+    opacity: 0.85;
 }
 
 .btn {
@@ -48,7 +48,7 @@ body {
     background: #2ea043;
 }
 
-/* SECTION STYLING */
+/* GENERAL SECTION STYLING */
 .section {
     padding: 80px 10%;
     max-width: 1000px;
@@ -104,14 +104,14 @@ footer {
     opacity: 0.5;
 }
 
-/* FADE IN EFFECT */
+/* FIXED FADE-IN ANIMATION */
 .fade-in {
     opacity: 0;
     transform: translateY(20px);
-    animation: fadeInMove 1s ease-out forwards;
+    animation: fadeIn 1s ease-out forwards;
 }
 
-@keyframes fadeInMove {
+@keyframes fadeIn {
     to {
         opacity: 1;
         transform: translateY(0);
