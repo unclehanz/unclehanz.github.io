@@ -104,16 +104,3 @@ footer {
     opacity: 0.5;
 }
 
-/* FIXED FADE-IN ANIMATION */
-.fade-in {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeIn 1s ease-out forwards;
-}
-
-@keyframes fadeIn {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
