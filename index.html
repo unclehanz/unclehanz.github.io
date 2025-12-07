@@ -3,73 +3,147 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Portfolio</title>
-    <link rel="stylesheet" href="style.css" />
+    <title>Hanz Rodil | Portfolio</title>
+
+    <!-- Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-    <!-- HERO SECTION -->
-    <header class="hero fade-in">
-        <div class="hero-content">
-            <h1>Hello, I'm <span>Hanz Uriel D. Rodil</span></h1>
-            <p>Aspiring Developer | Programmer | IT Student</p>
+<!-- NAVBAR -->
+<nav class="navbar">
+    <h3 class="logo">HR</h3>
+    <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+    <div class="hero-content fade-in">
+        <h1>Hello, I'm <span>Hanz Uriel D. Rodil</span></h1>
+        <p>Aspiring Software Developer & IT Graduate</p>
+
+        <div class="hero-buttons">
             <a href="#projects" class="btn">View My Work</a>
+            <a href="resume.pdf" class="btn-outline" download>Download Resume</a>
         </div>
-    </header>
+    </div>
+</header>
 
-    <!-- ABOUT -->
-    <section id="about" class="section fade-in">
-        <h2>About Me</h2>
-        <p>
-            A graduating student studying Bachelor of Science in Information Technology that is experienced in full stack development looking 
-for an opportunity to gain and apply technical skills and contribute to projects to gain more experience and start of the career with.
-        </p>
-    </section>
+<!-- ABOUT -->
+<section id="about" class="section fade-in">
+    <h2>About Me</h2>
+    <p>
+        I am a graduating Bachelor of Science in Information Technology student with hands-on
+        experience in full-stack and mobile application development. I enjoy building functional,
+        clean, and user-focused systems and I am seeking opportunities to grow as a junior developer.
+    </p>
+</section>
 
-    <!-- SKILLS -->
-    <section id="skills" class="section fade-in">
-        <h2>Skills</h2>
-        <div class="skills-container">
-            <span>HTML</span>
-            <span>CSS</span>
-            <span>JavaScript</span>
-            <span>Java</span>
-            <span>C#</span>
-            <span>react</span>
+<!-- SKILLS -->
+<section id="skills" class="section fade-in">
+    <h2>Skills</h2>
+    <div class="skills-container">
+        <span>HTML</span>
+        <span>CSS</span>
+        <span>JavaScript</span>
+        <span>Java</span>
+        <span>C#</span>
+        <span>React</span>
+        <span>SQLite</span>
+        <span>Android Studio</span>
+    </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="section fade-in">
+    <h2>Projects</h2>
+
+    <div class="project-container">
+
+        <div class="project-card">
+            <h3>Student Clearance System</h3>
+            <p>
+                An Android application for managing student clearances with local database storage,
+                form validation, and document handling.
+            </p>
+            <p class="tech">Java • SQLite • Android Studio</p>
+            <div class="project-links">
+                <a href="#" target="_blank">GitHub</a>
+                <a href="#" target="_blank">Demo</a>
+            </div>
         </div>
-    </section>
 
-    <!-- PROJECTS -->
-    <section id="projects" class="section fade-in">
-        <h2>Projects</h2>
-        <div class="project-container">
-            <div class="project-card">
-                <h3>Project One</h3>
-                <p>A web application built with modern technologies.</p>
-            </div>
-            <div class="project-card">
-                <h3>Project Two</h3>
-                <p>An IT project showcasing strong problem-solving skills.</p>
-            </div>
-            <div class="project-card">
-                <h3>Project Three</h3>
-                <p>A creative project demonstrating UI/UX fundamentals.</p>
+        <div class="project-card">
+            <h3>Personal Portfolio Website</h3>
+            <p>
+                A responsive portfolio website showcasing skills, projects, and professional profile
+                using modern UI design.
+            </p>
+            <p class="tech">HTML • CSS • JavaScript</p>
+            <div class="project-links">
+                <a href="#" target="_blank">GitHub</a>
+                <a href="#" target="_blank">Live</a>
             </div>
         </div>
-    </section>
 
-    <!-- CONTACT -->
-    <section id="contact" class="section fade-in">
-        <h2>Contact</h2>
-        <p>Email: <b>hanzrodil@gmail.com</b></p>
-    </section>
+        <div class="project-card">
+            <h3>IT Asset Management System</h3>
+            <p>
+                A simple system for tracking hardware and software inventory with CRUD operations.
+            </p>
+            <p class="tech">C# • .NET • SQL</p>
+            <div class="project-links">
+                <a href="#" target="_blank">GitHub</a>
+            </div>
+        </div>
 
-    <footer>
-        <p>© 2025 Hanz Uriel Rodil | All Rights Reserved</p>
-    </footer>
+    </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="section fade-in">
+    <h2>Education & Experience</h2>
+
+    <div class="timeline">
+        <div class="timeline-item">
+            <h4>BS Information Technology</h4>
+            <p>STI College – 2021 to 2025</p>
+        </div>
+
+        <div class="timeline-item">
+            <h4>On-the-Job Training / Internship</h4>
+            <p>IT Support & Development Tasks</p>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section fade-in">
+    <h2>Contact</h2>
+    <p>Email: <strong>hanzrodil@gmail.com</strong></p>
+
+    <div class="social-links">
+        <a href="https://github.com/" target="_blank">GitHub</a>
+        <a href="https://linkedin.com/" target="_blank">LinkedIn</a>
+    </div>
+
+    <p class="cta">Open to internships and entry-level developer roles.</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <p>© 2025 Hanz Uriel Rodil | All Rights Reserved</p>
+</footer>
 
 </body>
 </html>
