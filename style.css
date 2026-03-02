@@ -327,3 +327,45 @@ footer {
         transform: translateY(0);
     }
 }
+/* PEEKING PICTURE ANIMATION */
+.name-container {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.name-container span {
+    position: relative;
+    z-index: 10; /* Keeps the black name badge in front */
+}
+
+.peek-pic {
+    position: absolute;
+    top: 0;
+    right: 40px; /* Adjust this to slide the picture left or right behind the name */
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    
+    /* Neobrutalist styling for the picture */
+    border: 4px solid var(--border-dark, #000);
+    background: var(--bg-white, #fff); /* Provides a background if your pic is transparent */
+    box-shadow: 4px 4px 0px var(--accent-purple, #a855f7);
+    
+    z-index: 1; /* Puts the image behind the name */
+    pointer-events: none; /* Prevents the image from interfering with your mouse hover */
+    
+    /* Starting position: hidden securely behind the name */
+    transform-origin: bottom right;
+    transform: translateY(10px) rotate(0deg);
+    opacity: 0; 
+    
+    /* The bouncy spring animation */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+}
+
+.name-container:hover .peek-pic {
+    /* Pops up and tilts its head! */
+    transform: translateY(-90px) rotate(15deg);
+    opacity: 1;
+}
