@@ -272,16 +272,69 @@ p {
     gap: 15px;
 }
 
-.skills-container span {
+/* Wrapper tag — position:relative so icon can peek out */
+.skill-tag {
+    position: relative;
     background: var(--bg-white);
     padding: 12px 24px;
     font-weight: 600;
     border: 3px solid var(--border-dark);
     box-shadow: 4px 4px 0px var(--text-black);
-    transition: 0.2s;
+    transition: background 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s;
+    cursor: default;
+    /* Prevent icon from being clipped */
+    overflow: visible;
 }
 
-.skills-container span:hover {
+.skill-tag span:not(.skill-icon-emoji) {
+    position: relative;
+    z-index: 2;
+}
+
+/* The peeking icon — devicon <i> or emoji <span> */
+.skill-icon {
+    position: absolute;
+    /* Start tucked behind the bottom of the tag */
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%) translateY(0px) rotate(0deg) scale(0.6);
+    transform-origin: bottom center;
+
+    font-size: 2.4rem;        /* devicon size */
+    line-height: 1;
+
+    opacity: 0;
+    z-index: 10;
+    pointer-events: none;
+
+    /* Neobrutalist badge around the icon */
+    background: var(--bg-white);
+    border: 3px solid var(--border-dark);
+    box-shadow: 4px 4px 0px var(--accent-purple);
+    border-radius: 6px;
+    padding: 6px;
+
+    transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.skill-icon-emoji {
+    font-size: 1.8rem;
+}
+
+/* On hover — icon pops up above the tag */
+.skill-tag:hover .skill-icon {
+    bottom: calc(100% + 10px);   /* floats above the tag */
+    transform: translateX(-50%) translateY(0px) rotate(-8deg) scale(1);
+    opacity: 1;
+}
+
+/* Alternating tilt directions for personality */
+.skill-tag:nth-child(even):hover .skill-icon {
+    transform: translateX(-50%) translateY(0px) rotate(8deg) scale(1);
+}
+
+/* Tag itself changes on hover */
+.skill-tag:hover {
     background: var(--accent-purple);
     color: var(--bg-white);
     transform: translate(-2px, -2px);
