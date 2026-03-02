@@ -10,7 +10,7 @@
 :root {
     --bg-white: #ffffff;
     --text-black: #000000;
-    --accent-purple: #a855f7; /* Vibrant Neobrutalist Purple */
+    --accent-purple: #a855f7;
     --border-dark: #000000;
     --hard-shadow: 6px 6px 0px var(--border-dark);
     --hover-shadow: 2px 2px 0px var(--border-dark);
@@ -23,12 +23,11 @@ html {
 body {
     background: var(--bg-white);
     color: var(--text-black);
-    /* Optional: Gives a subtle graph-paper texture often seen in this style */
     background-image: radial-gradient(#e5e7eb 2px, transparent 2px);
     background-size: 30px 30px;
 }
 
-/* NAVBAR */
+/* ===================== NAVBAR ===================== */
 .navbar {
     position: fixed;
     top: 0;
@@ -58,7 +57,8 @@ body {
     transition: 0.2s ease;
 }
 
-.navbar a:hover {
+.navbar a:hover,
+.navbar a.active {
     background: var(--accent-purple);
     color: var(--bg-white);
     border: 2px solid var(--border-dark);
@@ -73,18 +73,56 @@ body {
     padding: 5px 10px;
     border: 3px solid var(--border-dark);
     box-shadow: 4px 4px 0px var(--border-dark);
+    flex-shrink: 0;
 }
 
-/* HERO */
+/* Hamburger Button */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 22px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    z-index: 1001;
+}
+
+.hamburger span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background: var(--text-black);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.hamburger.open span:nth-child(1) {
+    transform: translateY(9.5px) rotate(45deg);
+}
+.hamburger.open span:nth-child(2) {
+    opacity: 0;
+}
+.hamburger.open span:nth-child(3) {
+    transform: translateY(-9.5px) rotate(-45deg);
+}
+
+/* Mobile Nav Overlay */
+.nav-menu {
+    display: flex;
+}
+
+/* ===================== HERO ===================== */
 .hero {
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    /* Removed the image overlay for a cleaner brutalist look */
     background: var(--bg-white);
-    padding-top: 80px; 
+    padding-top: 80px;
 }
 
 .hero-content {
@@ -102,23 +140,80 @@ body {
     line-height: 1.2;
 }
 
-.hero span {
-    color: var(--bg-white);
-    background: var(--text-black);
-    padding: 0 10px;
-    display: inline-block;
-    transform: rotate(-2deg);
-}
-
 .hero p {
     margin-top: 20px;
     font-size: 1.2rem;
     font-weight: 600;
 }
 
-/* BUTTONS */
+/* ===================== NAME / PEEK PIC ===================== */
+.name-container {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+/* Tooltip hint */
+.name-container::after {
+    content: "hover me 👀";
+    position: absolute;
+    bottom: -28px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: var(--accent-purple);
+    letter-spacing: 0.05em;
+    text-transform: lowercase;
+    opacity: 0.7;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+.name-container > span {
+    position: relative;
+    z-index: 10;
+    color: var(--bg-white);
+    background: var(--text-black);
+    padding: 0 10px;
+    display: inline-block;
+    transform: rotate(-2deg);
+    /* Subtle underline hint */
+    border-bottom: 3px solid var(--accent-purple);
+    transition: background 0.2s;
+}
+
+.name-container:hover > span {
+    background: var(--accent-purple);
+}
+
+.peek-pic {
+    position: absolute;
+    top: 0;
+    right: 0px;
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border: 4px solid var(--border-dark);
+    background: var(--bg-white);
+    box-shadow: 6px 6px 0px var(--accent-purple);
+    z-index: 1;
+    pointer-events: none;
+    transform-origin: bottom right;
+    transform: translateY(40px) rotate(0deg);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Only trigger on the name-container, not the whole hero */
+.name-container:hover .peek-pic {
+    transform: translateY(-150px) rotate(15deg);
+    opacity: 1;
+}
+
+/* ===================== BUTTONS ===================== */
 .hero-buttons {
-    margin-top: 30px;
+    margin-top: 40px;
     display: flex;
     gap: 20px;
     justify-content: center;
@@ -146,20 +241,23 @@ body {
     box-shadow: var(--hover-shadow);
 }
 
-/* SECTIONS */
+/* ===================== SECTIONS ===================== */
 .section {
-    padding: 100px 10%;
+    padding: clamp(60px, 8vw, 100px) clamp(5%, 10%, 10%);
     max-width: 1000px;
     margin: auto;
 }
 
 h2 {
-    font-size: 2.8rem;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
     margin-bottom: 30px;
     color: var(--text-black);
     text-transform: uppercase;
     font-weight: 800;
-    text-shadow: 3px 3px 0px var(--accent-purple);
+    /* Replaced text-shadow with a cleaner border underline */
+    display: inline-block;
+    border-bottom: 5px solid var(--accent-purple);
+    padding-bottom: 6px;
 }
 
 p {
@@ -167,7 +265,7 @@ p {
     font-weight: 400;
 }
 
-/* SKILLS */
+/* ===================== SKILLS ===================== */
 .skills-container {
     display: flex;
     flex-wrap: wrap;
@@ -190,11 +288,16 @@ p {
     box-shadow: 6px 6px 0px var(--text-black);
 }
 
-/* PROJECTS */
+/* ===================== PROJECTS ===================== */
 .project-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
+}
+
+/* Featured first card spans 2 columns on wide screens */
+.project-card.featured {
+    grid-column: span 2;
 }
 
 .project-card {
@@ -214,6 +317,10 @@ p {
     font-size: 1.5rem;
     margin-bottom: 10px;
     font-weight: 700;
+}
+
+.project-card.featured h3 {
+    font-size: 1.8rem;
 }
 
 .project-card .tech {
@@ -245,17 +352,35 @@ p {
     color: var(--bg-white);
 }
 
-/* EXPERIENCE */
+/* ===================== EXPERIENCE ===================== */
 .timeline-item {
     position: relative;
     background: var(--bg-white);
     border: 4px solid var(--border-dark);
     box-shadow: var(--hard-shadow);
-    padding: 25px;
+    padding: 25px 25px 25px 100px;
     margin-bottom: 25px;
-    display: flex;
-    align-items: center;
     transition: all 0.2s ease;
+}
+
+/* Year badge on the left */
+.timeline-item .year-badge {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--accent-purple);
+    color: var(--bg-white);
+    font-size: 0.7rem;
+    font-weight: 800;
+    padding: 4px 8px;
+    border: 2px solid var(--border-dark);
+    box-shadow: 2px 2px 0px var(--border-dark);
+    white-space: nowrap;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 .timeline-image {
@@ -270,17 +395,51 @@ p {
 .timeline-item:hover {
     transform: translate(2px, 2px);
     box-shadow: var(--hover-shadow);
-    background: #faf5ff; /* very light purple */
+    background: #faf5ff;
 }
 
-/* CONTACT */
+.timeline-item h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+/* ===================== CONTACT ===================== */
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.contact-info p {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+}
+
+.contact-info .label {
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: #f3f4f6;
+    border: 2px solid var(--border-dark);
+    padding: 2px 8px;
+    min-width: 80px;
+    text-align: center;
+}
+
 .social-links {
     margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
 }
 
 .social-links a {
     display: inline-block;
-    margin-right: 15px;
     color: var(--bg-white);
     background: var(--text-black);
     padding: 10px 20px;
@@ -302,7 +461,7 @@ p {
     font-size: 1.1rem;
 }
 
-/* FOOTER */
+/* ===================== FOOTER ===================== */
 footer {
     text-align: center;
     padding: 30px;
@@ -312,58 +471,137 @@ footer {
     font-weight: 600;
 }
 
-/* ANIMATION */
+/* ===================== SCROLL ANIMATIONS ===================== */
 .fade-in {
-    animation: fadeIn 0.8s ease forwards;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-/* PEEKING PICTURE ANIMATION - UPDATED */
-.name-container {
-    position: relative;
-    display: inline-block;
-}
-
-.name-container span {
-    position: relative;
-    z-index: 10; /* Keeps the black name badge in front */
-}
-
-.peek-pic {
-    position: absolute;
-    top: 0;
-    right: 0px; /* Centers it a bit better behind the name */
-    width: 180px;  /* BIGGER PICTURE */
-    height: 180px; /* BIGGER PICTURE */
-    object-fit: cover;
-    
-    border: 4px solid var(--border-dark, #000);
-    background: var(--bg-white, #fff);
-    box-shadow: 6px 6px 0px var(--accent-purple, #a855f7);
-    
-    z-index: 1; 
-    pointer-events: none; 
-    
-    /* Tucked further down to hide the larger image */
-    transform-origin: bottom right;
-    transform: translateY(40px) rotate(0deg); 
-    opacity: 0; 
-    
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-}
-
-/* THE HITBOX: Now triggers when hovering ANYWHERE in the .hero section */
-.hero:hover .peek-pic {
-    /* Slides up higher to reveal the bigger image */
-    transform: translateY(-150px) rotate(15deg);
+.fade-in.visible {
     opacity: 1;
+    transform: translateY(0);
+}
+
+/* Hero fades in immediately */
+.hero .fade-in,
+.hero-content.fade-in {
+    animation: fadeInImmediate 0.8s ease forwards;
+    opacity: 0;
+}
+
+@keyframes fadeInImmediate {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ===================== CAT CURSOR ===================== */
+/* Hide on touch devices */
+@media (hover: none) {
+    #dangling-cat,
+    #cat-string {
+        display: none;
+    }
+}
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-menu {
+        display: none;
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 70%;
+        max-width: 300px;
+        height: 100vh;
+        background: var(--bg-white);
+        border-left: 4px solid var(--border-dark);
+        box-shadow: -8px 0 0px var(--accent-purple);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+        z-index: 1000;
+        padding: 40px 20px;
+    }
+
+    .nav-menu.open {
+        display: flex;
+    }
+
+    .navbar ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 25px;
+        width: 100%;
+    }
+
+    .navbar a {
+        font-size: 1.2rem;
+        display: block;
+        text-align: center;
+    }
+
+    /* Overlay when menu is open */
+    .nav-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.4);
+        z-index: 999;
+    }
+
+    .nav-overlay.open {
+        display: block;
+    }
+
+    .hero-content {
+        padding: 30px 20px;
+        margin: 0 15px;
+    }
+
+    .hero h1 {
+        font-size: clamp(1.8rem, 6vw, 3rem);
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .project-card.featured {
+        grid-column: span 1;
+    }
+
+    .timeline-item {
+        padding: 20px 20px 20px 80px;
+    }
+
+    .timeline-item .year-badge {
+        left: 10px;
+        font-size: 0.6rem;
+        padding: 3px 6px;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar {
+        padding: 15px 5%;
+    }
+
+    .section {
+        padding: 60px 5%;
+    }
+
+    .hero-content {
+        padding: 25px 15px;
+    }
+
+    .name-container::after {
+        display: none;
+    }
 }
