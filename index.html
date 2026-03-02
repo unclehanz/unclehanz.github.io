@@ -115,5 +115,86 @@
 <footer>
     <p>© 2026 Hanz Uriel D. Rodil | All Rights Reserved</p> </footer>
 
+    <svg id="cat-string" style="position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:9998;">
+    <line id="string-line" x1="0" y1="0" x2="0" y2="0" stroke="var(--border-dark, #000)" stroke-width="3" />
+</svg>
+
+<div id="dangling-cat" style="position:fixed; pointer-events:none; z-index:9999; transform-origin: top center; background: var(--bg-white, #fff); border: 3px solid var(--border-dark, #000); box-shadow: 4px 4px 0px var(--accent-purple, #a855f7); padding: 5px 8px; border-radius: 8px; font-size: 1.5rem; display: flex; justify-content: center; align-items: center;">
+    🐱
+</div>
+
+<script>
+    const cat = document.getElementById('dangling-cat');
+    const line = document.getElementById('string-line');
+    
+    // Start coordinates
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    
+    // Cat position and velocity
+    let catX = mouseX;
+    let catY = mouseY + 100;
+    let vx = 0;
+    let vy = 0;
+    
+    // Physics Configuration 
+    const stringLength = 70;   // How far the cat hangs below the cursor
+    const spring = 0.05;       // Bounciness (higher = tighter spring)
+    const friction = 0.88;     // Air resistance (lower = stops faster)
+    const gravity = 2;         // Downward pull
+    
+    // Track mouse movement
+    window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+    
+    function animateCat() {
+        // The point the cat wants to rest at
+        let targetX = mouseX;
+        let targetY = mouseY + stringLength;
+        
+        // Calculate distance between current cat position and target
+        let dx = targetX - catX;
+        let dy = targetY - catY;
+        
+        // Apply spring forces
+        vx += dx * spring;
+        vy += dy * spring;
+        
+        // Apply gravity
+        vy += gravity;
+        
+        // Apply friction to slow it down over time
+        vx *= friction;
+        vy *= friction;
+        
+        // Update actual position
+        catX += vx;
+        catY += vy;
+        
+        // Calculate the swinging angle based on horizontal speed
+        let rotation = vx * 1.5; 
+        
+        // Lock the rotation so it doesn't spin uncontrollably
+        rotation = Math.max(-70, Math.min(70, rotation));
+        
+        // Render the Cat (offsets by roughly half its width/height to center it)
+        cat.style.transform = `translate(${catX - 25}px, ${catY - 10}px) rotate(${rotation}deg)`;
+        
+        // Render the String
+        line.setAttribute('x1', mouseX);
+        line.setAttribute('y1', mouseY);
+        line.setAttribute('x2', catX);
+        line.setAttribute('y2', catY);
+        
+        // Loop the animation
+        requestAnimationFrame(animateCat);
+    }
+    
+    // Start the physics engine
+    animateCat();
+</script>
+
 </body>
 </html>
